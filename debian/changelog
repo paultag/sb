@@ -1,4 +1,4 @@
-sb (1.0.1) UNRELEASED; urgency=low
+sb (1.0.1) wicked; urgency=low
 
   * Adding the needed dep on unionfs
 
