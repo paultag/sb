@@ -8,7 +8,7 @@ Homepage: http://pault.ag/
 
 Package: sb
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, sbuild
+Depends: ${shlibs:Depends}, ${misc:Depends}, sbuild, unionfs-fuse
 Description: sbuild wrapper
  this package contains my wrappers for sbuild, for my own use
  and stuff. this is mostly filler text.

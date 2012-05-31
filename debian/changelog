@@ -1,3 +1,9 @@
+sb (1.0.1) UNRELEASED; urgency=low
+
+  * Adding the needed dep on unionfs
+
+ -- Paul Tagliamonte <paultag@ubuntu.com>  Thu, 31 May 2012 00:05:57 -0400
+
 sb (1.0.0) wicked; urgency=low
 
   * Initial release.
