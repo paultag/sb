@@ -1,0 +1,8 @@
+sb                     /usr/bin
+sb-create              /usr/bin
+sb-endsessions         /usr/bin
+sb-login               /usr/bin
+sb-maint               /usr/bin
+sbo                    /usr/bin
+sb-posthook            /usr/bin
+sb-prehook             /usr/bin
