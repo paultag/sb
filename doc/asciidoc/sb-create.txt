@@ -1,0 +1,52 @@
+fbautostart(1)
+==============
+Paul Tagliamonte <paultag@ubuntu.com>
+June 1st 2012
+:man source:   sb.txt
+:man version:  {revision}
+:man manual:   sb Manual
+
+NAME
+----
+sb-create - create a new 'sb(1)' chroot
+
+SYNOPSIS
+--------
+*sb-create* ['variant'] ['dist']
+
+DESCRIPTION
+-----------
+'sb-create(1)' creates a new sb chroot for sbuild to use (eventually) in the
+right place. This wraps a call to 'debootstrap(1)', which will configure a
+chroot suitable for use with 'schroot(1)' and 'sbuild(1)'.
+
+Keep in mind this does *not* use 'sbuild-createchroot(1)', which is the correct
+way to build a chroot for these tools.
+
+OPTIONS
+-------
+*variant*::
+    This option (always first) is the variant of chroot to use. This is
+    something like \"clang\" or \"gcc\". This option defaults to \"default\".
+    It's common to set up symbolic links to provide sane behavior.
+
+*dist*::
+    This option (always second) is the suite of chroots to use, such as
+        \"sid\" or \"testing\". This option defaults to \"sid\", but this
+        behavior may change soon to default to the last changelog target,
+        not counting 'UNRELEASED'.
+
+EXAMPLE
+-------
+
+$ sb-create clang sid
+ [...]
+
+AUTHORS
+-------
+Paul Tagliamonte <paultag@ubuntu.com> for sb
+
+SEE ALSO
+--------
+sb(1), sb-create(1), sb-login(1), sb-maint(1), sb-prehook(1), sb-posthook(1),
+sb-update(1), sbo(1)

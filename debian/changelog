@@ -1,3 +1,9 @@
+sb (1.0.3) UNRELEASED; urgency=low
+
+  * Update to the update script. Irony!
+
+ -- Paul Tagliamonte <paultag@ubuntu.com>  Fri, 01 Jun 2012 10:02:24 -0400
+
 sb (1.0.2) wicked; urgency=low
 
   * adding in sb-update.

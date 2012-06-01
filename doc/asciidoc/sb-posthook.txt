@@ -1,0 +1,30 @@
+fbautostart(1)
+==============
+Paul Tagliamonte <paultag@ubuntu.com>
+June 1st 2012
+:man source:   sb.txt
+:man version:  {revision}
+:man manual:   sb Manual
+
+NAME
+----
+sb-posthook - un-configure chroots and restore sanity
+
+SYNOPSIS
+--------
+*sb-posthook* 'variant' 'dist'
+
+DESCRIPTION
+-----------
+'sb-posthook(1)' is invoked by 'sb(1)' after returning from the chroot.
+
+You should only be using this if you're providing a different 'sbuild(1)'
+command to 'sb(1)', since it won't automatically invoke this.
+
+AUTHORS
+-------
+Paul Tagliamonte <paultag@ubuntu.com> for sb
+
+SEE ALSO
+--------
+sb(1)

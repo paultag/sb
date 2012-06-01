@@ -1,0 +1,88 @@
+fbautostart(1)
+==============
+Paul Tagliamonte <paultag@ubuntu.com>
+June 1st 2012
+:man source:   sb.txt
+:man version:  {revision}
+:man manual:   sb Manual
+
+NAME
+----
+sb - insane default sbuild(1) wrapper that forces my workflow on you
+
+SYNOPSIS
+--------
+*sb* ['variant'] ['dist']
+
+DESCRIPTION
+-----------
+*sb(1)* is a wrapper around sbuild(1) that enforces a very strict and particular
+workflow on you, the developer. This setup allows you to build with any of a set
+of chroots that have been slightly modified to build in a non-default way.
+
+The usage that this was designed for was to allow test-building of packages
+under both gcc(1) and clang(1), but have a clean chroot for each.
+
+FILES
+-----
+*/var/sbuild*::
+	This folder contains all of the sbuild chroots, lock files, wait files,
+        overlays and mountpoints for your chroot set. Folders such as
+        'sid.d' are populated with 'sid-variant' chroots, created with a tool
+        such as 'sb-create(1)'. Folders such as 'stable.overlay.d' contain
+        the divert point for writes, and others like 'sid.lock' for pid
+        lockfiles.
+        XXX: Document me more.
+
+OPTIONS
+-------
+*variant*::
+    This option (always first) is the variant of chroot to use. This is
+    something like \"clang\" or \"gcc\". This option defaults to \"default\".
+    It's common to set up symbolic links to provide sane behavior.
+
+*dist*::
+    This option (always second) is the suite of chroots to use, such as
+        \"sid\" or \"testing\". This option defaults to \"sid\", but this
+        behavior may change soon to default to the last changelog target,
+        not counting 'UNRELEASED'.
+
+ENVIRONMENT VARIABLES
+---------------------
+*SBUILD_COMMAND*::
+	The command to run, rather then sbuild(1). This is useful for exotic
+    invocations, or if you'd like to have other profiles. This is used
+    by 'sb-maint(1)' and 'sb-login(1)' to provide access to the chroot.
+
+    Please do note that you must be expecting a single argument with the
+    distribution to process. The correct location of the chroot is now
+    '/var/sbuild/$DIST', which may be either a symbolic link or a directory.
+
+    Setting this command also causes sb to not check if it's in the root
+    build directory. Beware.
+
+*SBUILD_DO_OVERLAY*::
+    This tells 'sb-prehook(1)' and 'sb-posthook(1)' to provide a unionfs overlay
+    on top of the dist mountpoint, then roll it back. The 'sbo(1)' wrapper
+    basically sets this env-var correctly and invokes 'sb(1)'.
+
+EXAMPLE
+-------
+
+$ pwd
+/home/jhacker/dev/debian/pkg/pkg-1.0/
+$ sb
+ [...]
+$ sb clang
+ [...]
+$ sb clang stable
+ [...]
+
+AUTHORS
+-------
+Paul Tagliamonte <paultag@ubuntu.com> for sb
+
+SEE ALSO
+--------
+sb(1), sb-create(1), sb-login(1), sb-maint(1), sb-prehook(1), sb-posthook(1),
+sb-update(1), sbo(1)

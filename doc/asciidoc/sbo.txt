@@ -1,0 +1,29 @@
+fbautostart(1)
+==============
+Paul Tagliamonte <paultag@ubuntu.com>
+June 1st 2012
+:man source:   sb.txt
+:man version:  {revision}
+:man manual:   sb Manual
+
+NAME
+----
+sbo - insane default sbuild(1) wrapper that forces my workflow on you
+
+SYNOPSIS
+--------
+*sbo* ['variant'] ['dist']
+
+DESCRIPTION
+-----------
+'sbo(1)' basically just sets an envvar and invokes 'sb(1)'. For usage of
+'sbo(1)', please consult the 'sb(1)' manpage.
+
+AUTHORS
+-------
+Paul Tagliamonte <paultag@ubuntu.com> for sb
+
+SEE ALSO
+--------
+sb(1), sb-create(1), sb-login(1), sb-maint(1), sb-prehook(1), sb-posthook(1),
+sb-update(1), sbo(1)

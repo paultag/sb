@@ -1,0 +1,32 @@
+fbautostart(1)
+==============
+Paul Tagliamonte <paultag@ubuntu.com>
+June 1st 2012
+:man source:   sb.txt
+:man version:  {revision}
+:man manual:   sb Manual
+
+NAME
+----
+sb-endsession - end all current sessions for a given dist
+
+SYNOPSIS
+--------
+*sb-endsessions 'variant' 'dist'
+
+DESCRIPTION
+-----------
+'sb-endsessions(1)' is a wrapper around schroot to end active sessions inside
+a given dist\'s chroot.
+
+This perhaps shouldn't be directly used. If you find yourself in true need
+of this tool, perhaps you should look at patching 'sb(1)' to provide correct
+behavior.
+
+AUTHORS
+-------
+Paul Tagliamonte <paultag@ubuntu.com> for sb
+
+SEE ALSO
+--------
+sb(1)

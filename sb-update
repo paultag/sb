@@ -2,6 +2,8 @@
 # Copyright (c) Paul Tagliamonte <paultag@ubuntu.com>, 2012, under the terms
 # and conditions of the Expat license.
 
+set -e
+
 DIST="sid"
 SBUILD=/var/sbuild
 
@@ -10,8 +12,9 @@ if [ "x$1" != "x" ]; then
 fi
 
 cd $SBUILD/$DIST.d
-variants=$(ls | grep -v "default" | sed s/sid-//g)
+variants=$(ls | grep -v "default" | sed "s/$DIST-//g")
 for x in $variants; do
-    echo "apt-get update -y" | sb-maint
-    echo "apt-get upgrade -y" | sb-maint
+    echo "I: $x $DIST"
+    echo "apt-get update -y" | sb-maint $x $DIST
+    echo "apt-get upgrade -y" | sb-maint $x $DIST
 done

@@ -1,0 +1,47 @@
+fbautostart(1)
+==============
+Paul Tagliamonte <paultag@ubuntu.com>
+June 1st 2012
+:man source:   sb.txt
+:man version:  {revision}
+:man manual:   sb Manual
+
+NAME
+----
+sb-update - update 'sb(1)' chroots
+
+SYNOPSIS
+--------
+*sb-update* dist
+
+DESCRIPTION
+-----------
+Unlike all the other sb tooks, 'sb-update(1)' only takes a single argument,
+dist. This is because 'sb-update(1)' will update and upgrade all variants for a
+single arch.
+
+Using something to proxy the updates rather then hitting your friendly mirror
+is strongly advised.
+
+OPTIONS
+-------
+*dist*::
+    This option (always second) is the suite of chroots to use, such as
+        \"sid\" or \"testing\". This option defaults to \"sid\", but this
+        behavior may change soon to default to the last changelog target,
+        not counting 'UNRELEASED'.
+
+EXAMPLE
+-------
+
+$ sb-update testing
+ [...]
+
+AUTHORS
+-------
+Paul Tagliamonte <paultag@ubuntu.com> for sb
+
+SEE ALSO
+--------
+sb(1), sb-create(1), sb-login(1), sb-maint(1), sb-prehook(1), sb-posthook(1),
+sb-update(1), sbo(1)
