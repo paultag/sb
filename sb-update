@@ -1,0 +1,17 @@
+#!/bin/bash
+# Copyright (c) Paul Tagliamonte <paultag@ubuntu.com>, 2012, under the terms
+# and conditions of the Expat license.
+
+DIST="sid"
+SBUILD=/var/sbuild
+
+if [ "x$1" != "x" ]; then
+    DIST=$1
+fi
+
+cd $SBUILD/$DIST.d
+variants=$(ls | grep -v "default" | sed s/sid-//g)
+for x in $variants; do
+    echo "apt-get update -y" | sb-maint
+    echo "apt-get upgrade -y" | sb-maint
+done
