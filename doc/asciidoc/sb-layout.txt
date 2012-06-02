@@ -12,12 +12,78 @@ sb-layout - layout for the 'sb(1)' bindings.
 
 DESCRIPTION
 -----------
-*sb(1)* is a wrapper around sbuild(1) that enforces a very strict and particular
-workflow on you, the developer. This setup allows you to build with any of a set
-of chroots that have been slightly modified to build in a non-default way.
+'sb(1)' enforces a very strict layout and use patern to 'sbuild(1)'. This is not
+because 'sbuild(1)' can't handle it -- in fact, quite the opposite. This
+structure enforces a bit of discipline, and encourages many very clean chroots
+to build with, rather then one very tanted one.
 
-The usage that this was designed for was to allow test-building of packages
-under both gcc(1) and clang(1), but have a clean chroot for each.
+This document is an overview as to how 'sb(1)' works, as well as how to play
+nice (and do expected things) with 'sb(1)' and friends.
+
+TERMINOLOGY
+-----------
+
+*sbuild build directory*::
+    where all the 'sb(1)' chroots, overlays, locks and friends all live. I've
+    set this to '/var/sbuild'. I encourage you to do the same.
+
+*lock file*::
+    regular file who's contents are the PID are the process that has locked
+    a chroot. This file may be ignored if the PID is no longer running.
+
+*wait file*::
+    regular file who's contents are the PID of the process that is waiting for
+    the chroot to unlock. If a wait file is present, you must not overwrite the
+    wait file, or wait for the unlock file to disapear. Stock behavior is to
+    exit if unable to get a wait lock.
+
+*dist.d*::
+    replace 'dist' with your suite (e.g. 'sid', 'testing', 'stable', 'wheezy'
+    and so forth.)
+
+SBUILD BUILD DIRECTORY LAYOUT
+-----------------------------
+
+*dist*::
+    the 'dist' object may be either a symbolic link or a folder. If the object
+    is a symbolic link, it must point at a valid directory on the system. This
+    is the thing that 'sbuild(1)' / 'schroot(1)' is aware of -- nothing else.
+    An example would be '/var/sbuild/sid' -> '/var/sbuild/sid.d/sid-default'.
+
+*dist.d*::
+    the 'dist.d' folder is the main storage place for all chroot variants for
+    the given suite. Chroots under 'dist.d' (such as, say, 'testing.d') must
+    be in the format 'dist-variant' (such as 'sid-clang'), so an example would
+    be '/var/sbuild/testing.d/testing-clang'.
+
+*dist.overlay.d*::
+    the 'dist.overlay.d' folder contains subfolders (one for each variant) to
+    redirect writes from the unionfs overlay to. This comes in handy in a
+    number of ways -- but mostly, this overlay lets you verify that the build
+    process doesn't accidentally taint the sbuild chroot (again, nothing can be
+    done to prevent a direct attack on the chroot besides being careful of what
+    you build).
+
+    Subdirectories must be in the same format as 'dist.d', such that
+    '/var/sbuild/sid.overlay.d/sid-gcc/' is a valid overlay. Keep in mind that
+    you could have a setup where these directories are symbolically linked
+    into a tmpfs filesystem to help speed up (at least, a little) the build
+    process.
+
+*dist.lock*::
+    the 'dist.lock' file (such as 'stable.lock') is a regular file who's only
+    contents are the PID of the process that has aquired the lock. When a chroot
+    is locked, you must not touch the 'dist' symbolic link (or folder), rather,
+    you must wait until the lock is removed. The only behavior you should exibit
+    would be to directly exit, or wait until the lock is removed. If the latter
+    is the prefered method, please obey the 'dist.wait' file.
+
+    A valid lock would be '/var/sbuild/testing.lock'.
+
+*dist.wait*::
+    the 'dist.wait' file shows that there's another process waiting for a lock
+    release. If the wait file is present (such as '/var/sbuild/testing.wait'),
+    you must return an error directly and not wait on the lock to be removed.
 
 AUTHORS
 -------
