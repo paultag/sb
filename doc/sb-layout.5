@@ -1,0 +1,165 @@
+'\" t
+.\"     Title: sb-layout
+.\"    Author: Paul Tagliamonte <paultag@ubuntu.com>
+.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
+.\"      Date: June 1st 2012
+.\"    Manual: sb Manual
+.\"    Source: sb-layout.txt
+.\"  Language: English
+.\"
+.TH "SB\-LAYOUT" "5" "June 1st 2012" "sb\-layout\&.txt" "sb Manual"
+.\" -----------------------------------------------------------------
+.\" * Define some portability stuff
+.\" -----------------------------------------------------------------
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.\" http://bugs.debian.org/507673
+.\" http://lists.gnu.org/archive/html/groff/2009-02/msg00013.html
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.\" -----------------------------------------------------------------
+.\" * set default formatting
+.\" -----------------------------------------------------------------
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.\" -----------------------------------------------------------------
+.\" * MAIN CONTENT STARTS HERE *
+.\" -----------------------------------------------------------------
+.SH "NAME"
+sb-layout \- layout for the \*(Aqsb(1)\*(Aq bindings\&.
+.SH "DESCRIPTION"
+.sp
+\fIsb(1)\fR enforces a very strict layout and use patern to \fIsbuild(1)\fR\&. This is not because \fIsbuild(1)\fR can\(cqt handle it \(em in fact, quite the opposite\&. This structure enforces a bit of discipline, and encourages many very clean chroots to build with, rather then one very tanted one\&.
+.sp
+This document is an overview as to how \fIsb(1)\fR works, as well as how to play nice (and do expected things) with \fIsb(1)\fR and friends\&.
+.SH "TERMINOLOGY"
+.PP
+\fBsbuild build directory\fR
+.RS 4
+where all the
+\fIsb(1)\fR
+chroots, overlays, locks and friends all live\&. I\(cqve set this to
+\fI/var/sbuild\fR\&. I encourage you to do the same\&.
+.RE
+.PP
+\fBlock file\fR
+.RS 4
+regular file who\(cqs contents are the PID are the process that has locked a chroot\&. This file may be ignored if the PID is no longer running\&.
+.RE
+.PP
+\fBwait file\fR
+.RS 4
+regular file who\(cqs contents are the PID of the process that is waiting for the chroot to unlock\&. If a wait file is present, you must not overwrite the wait file, or wait for the unlock file to disapear\&. Stock behavior is to exit if unable to get a wait lock\&.
+.RE
+.PP
+\fBdist\&.d\fR
+.RS 4
+replace
+\fIdist\fR
+with your suite (e\&.g\&.
+\fIsid\fR,
+\fItesting\fR,
+\fIstable\fR,
+\fIwheezy\fR
+and so forth\&.)
+.RE
+.SH "SBUILD BUILD DIRECTORY LAYOUT"
+.PP
+\fBdist\fR
+.RS 4
+the
+\fIdist\fR
+object may be either a symbolic link or a folder\&. If the object is a symbolic link, it must point at a valid directory on the system\&. This is the thing that
+\fIsbuild(1)\fR
+/
+\fIschroot(1)\fR
+is aware of \(em nothing else\&. An example would be
+\fI/var/sbuild/sid\fR
+\(->
+\fI/var/sbuild/sid\&.d/sid\-default\fR\&.
+.RE
+.PP
+\fBdist\&.d\fR
+.RS 4
+the
+\fIdist\&.d\fR
+folder is the main storage place for all chroot variants for the given suite\&. Chroots under
+\fIdist\&.d\fR
+(such as, say,
+\fItesting\&.d\fR) must be in the format
+\fIdist\-variant\fR
+(such as
+\fIsid\-clang\fR), so an example would be
+\fI/var/sbuild/testing\&.d/testing\-clang\fR\&.
+.RE
+.PP
+\fBdist\&.overlay\&.d\fR
+.RS 4
+the
+\fIdist\&.overlay\&.d\fR
+folder contains subfolders (one for each variant) to redirect writes from the unionfs overlay to\&. This comes in handy in a number of ways \(em but mostly, this overlay lets you verify that the build process doesn\(cqt accidentally taint the sbuild chroot (again, nothing can be done to prevent a direct attack on the chroot besides being careful of what you build)\&.
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+Subdirectories must be in the same format as \*(Aqdist\&.d\*(Aq, such that
+\*(Aq/var/sbuild/sid\&.overlay\&.d/sid\-gcc/\*(Aq is a valid overlay\&. Keep in mind that
+you could have a setup where these directories are symbolically linked
+into a tmpfs filesystem to help speed up (at least, a little) the build
+process\&.
+.fi
+.if n \{\
+.RE
+.\}
+.RE
+.PP
+\fBdist\&.lock\fR
+.RS 4
+the
+\fIdist\&.lock\fR
+file (such as
+\fIstable\&.lock\fR) is a regular file who\(cqs only contents are the PID of the process that has aquired the lock\&. When a chroot is locked, you must not touch the
+\fIdist\fR
+symbolic link (or folder), rather, you must wait until the lock is removed\&. The only behavior you should exibit would be to directly exit, or wait until the lock is removed\&. If the latter is the prefered method, please obey the
+\fIdist\&.wait\fR
+file\&.
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+A valid lock would be \*(Aq/var/sbuild/testing\&.lock\*(Aq\&.
+.fi
+.if n \{\
+.RE
+.\}
+.RE
+.PP
+\fBdist\&.wait\fR
+.RS 4
+the
+\fIdist\&.wait\fR
+file shows that there\(cqs another process waiting for a lock release\&. If the wait file is present (such as
+\fI/var/sbuild/testing\&.wait\fR), you must return an error directly and not wait on the lock to be removed\&.
+.RE
+.SH "AUTHORS"
+.sp
+Paul Tagliamonte <\m[blue]\fBpaultag@ubuntu\&.com\fR\m[]\&\s-2\u[1]\d\s+2>
+.SH "SEE ALSO"
+.sp
+sb(1), sb\-create(1), sb\-login(1), sb\-maint(1), sb\-prehook(1), sb\-posthook(1), sb\-update(1), sbo(1)
+.SH "AUTHOR"
+.PP
+\fBPaul Tagliamonte\fR <\&paultag@ubuntu\&.com\&>
+.RS 4
+Author.
+.RE
+.SH "NOTES"
+.IP " 1." 4
+paultag@ubuntu.com
+.RS 4
+\%mailto:paultag@ubuntu.com
+.RE

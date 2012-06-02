@@ -1,13 +1,13 @@
 '\" t
-.\"     Title: fbautostart
+.\"     Title: sb-maint
 .\"    Author: Paul Tagliamonte <paultag@ubuntu.com>
 .\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
 .\"      Date: June 1st 2012
 .\"    Manual: sb Manual
-.\"    Source: sb.txt
+.\"    Source: sb-maint.txt
 .\"  Language: English
 .\"
-.TH "FBAUTOSTART" "1" "June 1st 2012" "sb\&.txt" "sb Manual"
+.TH "SB\-MAINT" "1" "June 1st 2012" "sb\-maint\&.txt" "sb Manual"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -36,19 +36,19 @@ sb-maint \- login to a given sb chroot
 .sp
 \fIsb\-maint(1)\fR provides a way to access your chroot from the host system without painfully setting everything up\&.
 .sp
-Please do keep in mind \fIsb\-maint(1)\fR does \fBnot\fR use a union mount, so if you wish to overlay the host with a union, it\(cqs advised to set the correct envvar (detailed in \fIsb(1)\fR\e\*(Aqs manpage)\&.
+Please do keep in mind \fIsb\-maint(1)\fR does \fBnot\fR use a union mount, so if you wish to overlay the host with a union, it\(cqs advised to set the correct envvar (detailed in \fIsb(1)\fR\*(Aqs manpage)\&.
 .sp
 \fIsb\-maint(1)\fR is different then \fIsb\-login(1)\fR in that \fIsb\-login(1)\fR will log you into the chroot as your usual user, whereas \fIsb\-maint(1)\fR will log you into the chroot as root\&.
 .SH "OPTIONS"
 .PP
 \fBvariant\fR
 .RS 4
-This option (always first) is the variant of chroot to use\&. This is something like \e"clang\e" or \e"gcc\e"\&. This option defaults to \e"default\e"\&. It\(cqs common to set up symbolic links to provide sane behavior\&.
+This option (always first) is the variant of chroot to use\&. This is something like "clang" or "gcc"\&. This option defaults to "default"\&. It\(cqs common to set up symbolic links to provide sane behavior\&.
 .RE
 .PP
 \fBdist\fR
 .RS 4
-This option (always second) is the suite of chroots to use, such as \e"sid\e" or \e"testing\e"\&. This option defaults to \e"sid\e", but this behavior may change soon to default to the last changelog target, not counting
+This option (always second) is the suite of chroots to use, such as "sid" or "testing"\&. This option defaults to "sid", but this behavior may change soon to default to the last changelog target, not counting
 \fIUNRELEASED\fR\&.
 .RE
 .SH "EXAMPLE"
