@@ -76,8 +76,16 @@ echo "I: CPUs (-j): $CPUCOUNT"
 echo "I: "
 
 if [ "x$SBUILD_COMMAND" == "x" ]; then
+    CHANGELOG="$(dpkg-parsechangelog)"
+    SOURCE="$(echo "$CHANGELOG" | grep Source | sed s/Source:\ //g)"
+    VERSION="$(echo "$CHANGELOG" | grep Version | sed s/Version:\ //g)"
+    DSC=${SOURCE}_${VERSION}.dsc
+    echo "I: Building source"
     sb-prehook $VARIANT $DIST
-    sbuild --source -A -d $DIST -j $CPUCOUNT
+    dpkg-buildpackage -us -uc -sa -S
+    cd ..
+    sbuild --source -A -d $DIST -j $CPUCOUNT $DSC
+    cd -
     sb-posthook $VARIANT $DIST
 else
     $SBUILD_COMMAND $DIST
