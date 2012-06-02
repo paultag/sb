@@ -1,4 +1,4 @@
-sb (1.0.3) UNRELEASED; urgency=low
+sb (1.0.3) wicked; urgency=low
 
   * Update to the update script. Irony!
   * Moved sb-endessions --> sb-endsession. Turns out xmlto man has a problem
