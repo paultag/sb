@@ -1,6 +1,6 @@
 sb                     /usr/bin
 sb-create              /usr/bin
-sb-endsessions         /usr/bin
+sb-endsession          /usr/bin
 sb-login               /usr/bin
 sb-maint               /usr/bin
 sbo                    /usr/bin

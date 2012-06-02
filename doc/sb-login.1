@@ -1,0 +1,79 @@
+'\" t
+.\"     Title: fbautostart
+.\"    Author: Paul Tagliamonte <paultag@ubuntu.com>
+.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
+.\"      Date: June 1st 2012
+.\"    Manual: sb Manual
+.\"    Source: sb.txt
+.\"  Language: English
+.\"
+.TH "FBAUTOSTART" "1" "June 1st 2012" "sb\&.txt" "sb Manual"
+.\" -----------------------------------------------------------------
+.\" * Define some portability stuff
+.\" -----------------------------------------------------------------
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.\" http://bugs.debian.org/507673
+.\" http://lists.gnu.org/archive/html/groff/2009-02/msg00013.html
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.\" -----------------------------------------------------------------
+.\" * set default formatting
+.\" -----------------------------------------------------------------
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.\" -----------------------------------------------------------------
+.\" * MAIN CONTENT STARTS HERE *
+.\" -----------------------------------------------------------------
+.SH "NAME"
+sb-login \- login to a given sb chroot\&.
+.SH "SYNOPSIS"
+.sp
+\fBsb\-login\fR [\fIvariant\fR] [\fIdist\fR]
+.SH "DESCRIPTION"
+.sp
+\fIsb\-login(1)\fR provides a way to access your chroot from the host system without painfully setting everything up\&.
+.sp
+Please do keep in mind \fIsb\-login(1)\fR does \fBnot\fR use a union mount, so if you wish to overlay the host with a union, it\(cqs advised to set the correct envvar (detailed in \fIsb(1)\fR\e\*(Aqs manpage)\&.
+.sp
+\fIsb\-login(1)\fR is different then \fIsb\-maint(1)\fR in that \fIsb\-login(1)\fR will log you into the chroot as your current user, rather then as root\&.
+.SH "OPTIONS"
+.PP
+\fBvariant\fR
+.RS 4
+This option (always first) is the variant of chroot to use\&. This is something like \e"clang\e" or \e"gcc\e"\&. This option defaults to \e"default\e"\&. It\(cqs common to set up symbolic links to provide sane behavior\&.
+.RE
+.PP
+\fBdist\fR
+.RS 4
+This option (always second) is the suite of chroots to use, such as \e"sid\e" or \e"testing\e"\&. This option defaults to \e"sid\e", but this behavior may change soon to default to the last changelog target, not counting
+\fIUNRELEASED\fR\&.
+.RE
+.SH "EXAMPLE"
+.sp
+$ sb\-login clang sid [\&...] (sid)\m[blue]\fBuser@chroot\fR\m[]\&\s-2\u[1]\d\s+2:/$
+.SH "AUTHORS"
+.sp
+Paul Tagliamonte <\m[blue]\fBpaultag@ubuntu\&.com\fR\m[]\&\s-2\u[2]\d\s+2> for sb
+.SH "SEE ALSO"
+.sp
+sb(1), sb\-create(1), sb\-login(1), sb\-maint(1), sb\-prehook(1), sb\-posthook(1), sb\-update(1), sbo(1)
+.SH "AUTHOR"
+.PP
+\fBPaul Tagliamonte\fR <\&paultag@ubuntu\&.com\&>
+.RS 4
+Author.
+.RE
+.SH "NOTES"
+.IP " 1." 4
+user@chroot
+.RS 4
+\%mailto:user@chroot
+.RE
+.IP " 2." 4
+paultag@ubuntu.com
+.RS 4
+\%mailto:paultag@ubuntu.com
+.RE

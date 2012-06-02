@@ -8,7 +8,7 @@ SBUILD=/var/sbuild
 VARIANT=$1
 DIST=$2
 
-sb-endsessions $VARIANT $DIST
+sb-endsession $VARIANT $DIST
 
 if [ ! -h $SBUILD/$DIST ]; then
     if [ -d $SBUILD/$DIST ]; then

@@ -3,11 +3,10 @@
 #
 
 SRC1 = sb-create.txt sb-login.txt sbo.txt sb-prehook.txt sb-update.txt \
-	   sb-endsessions.txt sb-maint.txt sb-posthook.txt sb.txt
+	   sb-endsession.txt sb-maint.txt sb-posthook.txt sb.txt
 
 MAN = $(SRC1:.txt=.1)
-MANdotIN = $(addsuffix .in,$(MAN))
-DISTFILES = $(addprefix ../,$(MANdotIN))
+DISTFILES = $(addprefix ../,$(MAN))
 
 all: $(MAN)
 
@@ -22,10 +21,10 @@ clean:
 %.5 : %.xml
 	xmlto man $<
 
-../%.1.in: %.1
+../%.1: %.1
 	cp $< $@
 
-../%.5.in: %.5
+../%.5: %.5
 	cp $< $@
 
 %.xml : %.txt

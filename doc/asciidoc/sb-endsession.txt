@@ -12,11 +12,11 @@ sb-endsession - end all current sessions for a given dist
 
 SYNOPSIS
 --------
-*sb-endsessions 'variant' 'dist'
+*sb-endsession 'variant' 'dist'
 
 DESCRIPTION
 -----------
-'sb-endsessions(1)' is a wrapper around schroot to end active sessions inside
+'sb-endsession(1)' is a wrapper around schroot to end active sessions inside
 a given dist\'s chroot.
 
 This perhaps shouldn't be directly used. If you find yourself in true need

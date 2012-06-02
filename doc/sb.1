@@ -1,0 +1,132 @@
+'\" t
+.\"     Title: fbautostart
+.\"    Author: Paul Tagliamonte <paultag@ubuntu.com>
+.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
+.\"      Date: June 1st 2012
+.\"    Manual: sb Manual
+.\"    Source: sb.txt
+.\"  Language: English
+.\"
+.TH "FBAUTOSTART" "1" "June 1st 2012" "sb\&.txt" "sb Manual"
+.\" -----------------------------------------------------------------
+.\" * Define some portability stuff
+.\" -----------------------------------------------------------------
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.\" http://bugs.debian.org/507673
+.\" http://lists.gnu.org/archive/html/groff/2009-02/msg00013.html
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.\" -----------------------------------------------------------------
+.\" * set default formatting
+.\" -----------------------------------------------------------------
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.\" -----------------------------------------------------------------
+.\" * MAIN CONTENT STARTS HERE *
+.\" -----------------------------------------------------------------
+.SH "NAME"
+sb \- insane default sbuild(1) wrapper that forces my workflow on you
+.SH "SYNOPSIS"
+.sp
+\fBsb\fR [\fIvariant\fR] [\fIdist\fR]
+.SH "DESCRIPTION"
+.sp
+\fBsb(1)\fR is a wrapper around sbuild(1) that enforces a very strict and particular workflow on you, the developer\&. This setup allows you to build with any of a set of chroots that have been slightly modified to build in a non\-default way\&.
+.sp
+The usage that this was designed for was to allow test\-building of packages under both gcc(1) and clang(1), but have a clean chroot for each\&.
+.SH "FILES"
+.PP
+\fB/var/sbuild\fR
+.RS 4
+This folder contains all of the sbuild chroots, lock files, wait files, overlays and mountpoints for your chroot set\&. Folders such as
+\fIsid\&.d\fR
+are populated with
+\fIsid\-variant\fR
+chroots, created with a tool such as
+\fIsb\-create(1)\fR\&. Folders such as
+\fIstable\&.overlay\&.d\fR
+contain the divert point for writes, and others like
+\fIsid\&.lock\fR
+for pid lockfiles\&. XXX: Document me more\&.
+.RE
+.SH "OPTIONS"
+.PP
+\fBvariant\fR
+.RS 4
+This option (always first) is the variant of chroot to use\&. This is something like \e"clang\e" or \e"gcc\e"\&. This option defaults to \e"default\e"\&. It\(cqs common to set up symbolic links to provide sane behavior\&.
+.RE
+.PP
+\fBdist\fR
+.RS 4
+This option (always second) is the suite of chroots to use, such as \e"sid\e" or \e"testing\e"\&. This option defaults to \e"sid\e", but this behavior may change soon to default to the last changelog target, not counting
+\fIUNRELEASED\fR\&.
+.RE
+.SH "ENVIRONMENT VARIABLES"
+.PP
+\fBSBUILD_COMMAND\fR
+.RS 4
+The command to run, rather then sbuild(1)\&. This is useful for exotic invocations, or if you\(cqd like to have other profiles\&. This is used by
+\fIsb\-maint(1)\fR
+and
+\fIsb\-login(1)\fR
+to provide access to the chroot\&.
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+Please do note that you must be expecting a single argument with the
+distribution to process\&. The correct location of the chroot is now
+\*(Aq/var/sbuild/$DIST\*(Aq, which may be either a symbolic link or a directory\&.
+.fi
+.if n \{\
+.RE
+.\}
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+Setting this command also causes sb to not check if it\*(Aqs in the root
+build directory\&. Beware\&.
+.fi
+.if n \{\
+.RE
+.\}
+.RE
+.PP
+\fBSBUILD_DO_OVERLAY\fR
+.RS 4
+This tells
+\fIsb\-prehook(1)\fR
+and
+\fIsb\-posthook(1)\fR
+to provide a unionfs overlay on top of the dist mountpoint, then roll it back\&. The
+\fIsbo(1)\fR
+wrapper basically sets this env\-var correctly and invokes
+\fIsb(1)\fR\&.
+.RE
+.SH "EXAMPLE"
+.sp
+$ pwd /home/jhacker/dev/debian/pkg/pkg\-1\&.0/ $ sb [\&...] $ sb clang [\&...] $ sb clang stable [\&...]
+.SH "AUTHORS"
+.sp
+Paul Tagliamonte <\m[blue]\fBpaultag@ubuntu\&.com\fR\m[]\&\s-2\u[1]\d\s+2> for sb
+.SH "SEE ALSO"
+.sp
+sb(1), sb\-create(1), sb\-login(1), sb\-maint(1), sb\-prehook(1), sb\-posthook(1), sb\-update(1), sbo(1)
+.SH "AUTHOR"
+.PP
+\fBPaul Tagliamonte\fR <\&paultag@ubuntu\&.com\&>
+.RS 4
+Author.
+.RE
+.SH "NOTES"
+.IP " 1." 4
+paultag@ubuntu.com
+.RS 4
+\%mailto:paultag@ubuntu.com
+.RE
