@@ -1,6 +1,9 @@
 sb (1.0.3) UNRELEASED; urgency=low
 
   * Update to the update script. Irony!
+  * Moved sb-endessions --> sb-endsession. Turns out xmlto man has a problem
+    with plurals. Will look at later.
+  * Aded manual pages for everything. Pending section 5 manpages.
 
  -- Paul Tagliamonte <paultag@ubuntu.com>  Fri, 01 Jun 2012 10:02:24 -0400
 
