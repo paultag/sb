@@ -1,5 +1,5 @@
 sb-maint(1)
-==============
+===========
 Paul Tagliamonte <paultag@ubuntu.com>
 June 1st 2012
 :man source:   sb-maint.txt
