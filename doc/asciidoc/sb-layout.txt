@@ -1,0 +1,29 @@
+fbautostart(1)
+==============
+Paul Tagliamonte <paultag@ubuntu.com>
+June 1st 2012
+:man source:   sb.txt
+:man version:  {revision}
+:man manual:   sb Manual
+
+NAME
+----
+sb-layout - layout for the 'sb(1)' bindings.
+
+DESCRIPTION
+-----------
+*sb(1)* is a wrapper around sbuild(1) that enforces a very strict and particular
+workflow on you, the developer. This setup allows you to build with any of a set
+of chroots that have been slightly modified to build in a non-default way.
+
+The usage that this was designed for was to allow test-building of packages
+under both gcc(1) and clang(1), but have a clean chroot for each.
+
+AUTHORS
+-------
+Paul Tagliamonte <paultag@ubuntu.com>
+
+SEE ALSO
+--------
+sb(1), sb-create(1), sb-login(1), sb-maint(1), sb-prehook(1), sb-posthook(1),
+sb-update(1), sbo(1)

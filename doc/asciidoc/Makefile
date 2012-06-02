@@ -5,12 +5,16 @@
 SRC1 = sb-create.txt sb-login.txt sbo.txt sb-prehook.txt sb-update.txt \
 	   sb-endsession.txt sb-maint.txt sb-posthook.txt sb.txt
 
-MAN = $(SRC1:.txt=.1)
-DISTFILES = $(addprefix ../,$(MAN))
+SRC5 = sb-layout.txt
 
-all: $(MAN)
+MAN1 = $(SRC1:.txt=.1)
+MAN5 = $(SRC5:.txt=.5)
+DISTFILES1 = $(addprefix ../,$(MAN1))
+DISTFILES5 = $(addprefix ../,$(MAN5))
 
-dist: $(DISTFILES)
+all: $(MAN1) $(MAN5)
+
+dist: $(DISTFILES1) $(DISTFILES5)
 
 clean:
 	rm -fv $(MAN)
