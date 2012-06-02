@@ -1,0 +1,9 @@
+doc/sb.1
+doc/sb-create.1
+doc/sb-endsession.1
+doc/sb-login.1
+doc/sb-maint.1
+doc/sbo.1
+doc/sb-posthook.1
+doc/sb-prehook.1
+doc/sb-update.1
