@@ -1,9 +1,9 @@
-sb (1.0.4) UNRELEASED; urgency=low
+sb (1.0.4) wicked; urgency=low
 
   * Updated documentation to be, well, right.
   * Added man 5 sb-layout.
 
- -- Paul Tagliamonte <paultag@ubuntu.com>  Sat, 02 Jun 2012 00:02:10 -0400
+ -- Paul Tagliamonte <paultag@ubuntu.com>  Sat, 02 Jun 2012 00:03:28 -0400
 
 sb (1.0.3) wicked; urgency=low
 
