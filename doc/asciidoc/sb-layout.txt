@@ -1,8 +1,8 @@
-fbautostart(1)
+sb-layout(5)
 ==============
 Paul Tagliamonte <paultag@ubuntu.com>
 June 1st 2012
-:man source:   sb.txt
+:man source:   sb-layout.txt
 :man version:  {revision}
 :man manual:   sb Manual
 

@@ -1,8 +1,8 @@
-fbautostart(1)
+sb-maint(1)
 ==============
 Paul Tagliamonte <paultag@ubuntu.com>
 June 1st 2012
-:man source:   sb.txt
+:man source:   sb-maint.txt
 :man version:  {revision}
 :man manual:   sb Manual
 
@@ -21,7 +21,7 @@ without painfully setting everything up.
 
 Please do keep in mind 'sb-maint(1)' does *not* use a union mount, so if you
 wish to overlay the host with a union, it's advised to set the correct
-envvar (detailed in 'sb(1)'\'s manpage).
+envvar (detailed in 'sb(1)''s manpage).
 
 'sb-maint(1)' is different then 'sb-login(1)' in that 'sb-login(1)' will log
 you into the chroot as your usual user, whereas 'sb-maint(1)' will log you
@@ -31,12 +31,12 @@ OPTIONS
 -------
 *variant*::
     This option (always first) is the variant of chroot to use. This is
-    something like \"clang\" or \"gcc\". This option defaults to \"default\".
+    something like "clang" or "gcc". This option defaults to "default".
     It's common to set up symbolic links to provide sane behavior.
 
 *dist*::
     This option (always second) is the suite of chroots to use, such as
-        \"sid\" or \"testing\". This option defaults to \"sid\", but this
+        "sid" or "testing". This option defaults to "sid", but this
         behavior may change soon to default to the last changelog target,
         not counting 'UNRELEASED'.
 
