@@ -47,7 +47,7 @@ fi
 echo "I: Aquiring lock"
 echo $$ > $SBUILD/$DIST.lock
 
-CURRENT=$(basename `ls -xl $SBUILD/$DIST | awk '{print $11}'`)
+CURRENT=$(readlink $SBUILD/$DIST)
 CPUCOUNT=`cat /proc/cpuinfo  | grep "^processor" | wc -l`
 
 # We set up the name like:

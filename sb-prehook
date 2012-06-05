@@ -25,6 +25,11 @@ if [ ! -h $SBUILD/$DIST ]; then
 fi
 
 if [ "x$SBUILD_DO_OVERLAY" != "x" ]; then
+    if [ -h $SBUILD/$DIST.overlay.d ]; then
+        if [ ! -d `readlink $SBUILD/$DIST.overlay.d` ]; then
+            mkdir -p  `readlink $SBUILD/$DIST.overlay.d`
+        fi
+    fi
     if [ ! -d $SBUILD/$DIST.overlay.d/$DIST-$VARIANT ]; then
         echo "I: Making new overlay."
         mkdir -p $SBUILD/$DIST.overlay.d/$DIST-$VARIANT
