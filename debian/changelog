@@ -1,3 +1,9 @@
+sb (1.0.6) UNRELEASED; urgency=low
+
+  * Patching up an issue right quick.
+
+ -- Paul Tagliamonte <paultag@ubuntu.com>  Mon, 04 Jun 2012 19:32:43 -0400
+
 sb (1.0.5) wicked; urgency=low
 
   * Modified sb to create a dsc and build rather then build in the directory

@@ -25,6 +25,11 @@ if [ ! -h $SBUILD/$DIST ]; then
 fi
 
 if [ "x$SBUILD_DO_OVERLAY" != "x" ]; then
+    if [ ! -d $SBUILD/$DIST.overlay.d/$DIST-$VARIANT ]; then
+        echo "I: Making new overlay."
+        mkdir -p $SBUILD/$DIST.overlay.d/$DIST-$VARIANT
+        echo "I: Made overlay."
+    fi
     echo "I: Shimming the old chroot out of the way. This will get gnarly."
     echo "I: You might need to auth..."
     rm -f $SBUILD/$DIST
@@ -35,4 +40,8 @@ if [ "x$SBUILD_DO_OVERLAY" != "x" ]; then
         -o allow_other,use_ino,suid,dev,nonempty \
         "$SBUILD/$DIST.overlay.d/$DIST-$VARIANT=RW:$SBUILD/$DIST.d/$DIST-$VARIANT=RO" \
         $SBUILD/$DIST
+    if [ $? -ne 0 ]; then
+        echo "WARNING! UNGOOD RESULT!"
+        exit 1
+    fi
 fi
