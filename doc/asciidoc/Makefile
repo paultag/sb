@@ -3,7 +3,7 @@
 #
 
 SRC1 = sb-create.txt sb-login.txt sbo.txt sb-prehook.txt sb-update.txt \
-	   sb-endsession.txt sb-maint.txt sb-posthook.txt sb.txt
+	   sb-endsession.txt sb-maint.txt sb-posthook.txt sb.txt sb-clean.txt
 
 SRC5 = sb-layout.txt
 

@@ -84,7 +84,7 @@ if [ "x$SBUILD_COMMAND" == "x" ]; then
     sb-prehook $VARIANT $DIST
     dpkg-buildpackage -us -uc -sa -S
     cd ..
-    sbuild --source -A -d $DIST -j $CPUCOUNT $DSC
+    sbuild --source -A -d $DIST -j $CPUCOUNT $DSC $SB_SBUILD_OPTS
     cd -
     sb-posthook $VARIANT $DIST
 else

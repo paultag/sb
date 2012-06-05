@@ -3,4 +3,5 @@
 # and conditions of the Expat license.
 
 export SBUILD_DO_OVERLAY="YES"
+export SB_SBUILD_OPTS="--purge=never --purge-deps=never --no-apt-update --no-apt-upgrade"
 sb $@

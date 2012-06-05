@@ -7,3 +7,4 @@ sbo                    /usr/bin
 sb-posthook            /usr/bin
 sb-prehook             /usr/bin
 sb-update              /usr/bin
+sb-clean               /usr/bin
