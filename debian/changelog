@@ -1,8 +1,11 @@
 sb (1.0.6) UNRELEASED; urgency=low
 
-  * Patching up an issue right quick.
+  * Fixed an sbuildism where I was hacking apart ls rather then using
+    readlink.
+  * Added link detection for the overlay, and create any folders needed
+    to resolve a broken link.
 
- -- Paul Tagliamonte <paultag@ubuntu.com>  Mon, 04 Jun 2012 19:32:43 -0400
+ -- Paul Tagliamonte <paultag@ubuntu.com>  Mon, 04 Jun 2012 21:36:08 -0400
 
 sb (1.0.5) wicked; urgency=low
 
