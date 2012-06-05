@@ -74,7 +74,7 @@ echo "I: Dist:      $DIST"
 echo "I: Variant:   $VARIANT"
 echo "I: CPUs (-j): $CPUCOUNT"
 echo "I: "
-
+RET=0
 if [ "x$SBUILD_COMMAND" == "x" ]; then
     CHANGELOG="$(dpkg-parsechangelog)"
     SOURCE="$(echo "$CHANGELOG" | grep Source | sed s/Source:\ //g)"
@@ -85,6 +85,7 @@ if [ "x$SBUILD_COMMAND" == "x" ]; then
     dpkg-buildpackage -us -uc -sa -S
     cd ..
     sbuild --source -A -d $DIST -j $CPUCOUNT $DSC $SB_SBUILD_OPTS
+    RET=$?
     cd -
     sb-posthook $VARIANT $DIST
 else
@@ -93,3 +94,4 @@ fi
 
 echo "I: Releasing lock"
 rm $SBUILD/$DIST.lock
+exit $RET
