@@ -1,3 +1,13 @@
+sb (1.0.7) UNRELEASED; urgency=low
+
+  * Adding in some flags:
+    + SB_BREAK_WAIT (if you don't want to wait on another PID)
+    + SBUILD_DSC (if you don't want to rebuild the dsc)
+    + SB_BUILD_OPTS (if you want to override the build opts)
+  * -v added to sbuild
+
+ -- Paul Tagliamonte <paultag@ubuntu.com>  Tue, 19 Jun 2012 18:48:49 -0400
+
 sb (1.0.6) wicked; urgency=low
 
   * Fixed an sbuildism where I was hacking apart ls rather then using
