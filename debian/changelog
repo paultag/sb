@@ -1,4 +1,4 @@
-sb (1.0.6) UNRELEASED; urgency=low
+sb (1.0.6) wicked; urgency=low
 
   * Fixed an sbuildism where I was hacking apart ls rather then using
     readlink.
@@ -8,7 +8,7 @@ sb (1.0.6) UNRELEASED; urgency=low
     sucker.
   * Adding in a sb-clean script & documenting it.
 
- -- Paul Tagliamonte <paultag@ubuntu.com>  Tue, 05 Jun 2012 18:16:54 -0400
+ -- Paul Tagliamonte <paultag@ubuntu.com>  Tue, 05 Jun 2012 20:28:15 -0400
 
 sb (1.0.5) wicked; urgency=low
 
