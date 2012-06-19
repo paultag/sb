@@ -3,5 +3,7 @@
 # and conditions of the Expat license.
 
 export SBUILD_DO_OVERLAY="YES"
+if [ "x$SB_BUILD_OPTS" == "x" ]; then
 export SB_SBUILD_OPTS="--purge=never --purge-deps=never --no-apt-update --no-apt-upgrade"
+fi
 exec sb $@

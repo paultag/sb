@@ -23,6 +23,12 @@ if [ "x$2" != "x" ]; then
 fi
 
 if [ -e $SBUILD/$DIST.lock ]; then
+    if [ "x$SB_BREAK_WAIT" != "x" ]; then
+        echo "E: Not waiting for the lock to be released."
+        echo "E: Because of SB_BREAK_WAIT."
+        echo "E: Failing out."
+        exit 10
+    fi
     PID=`cat $SBUILD/$DIST.lock`
     echo "W: We *must* wait for the finish of PID $PID"
     echo "W: Blocking execution until this file is removed."
@@ -76,15 +82,19 @@ echo "I: CPUs (-j): $CPUCOUNT"
 echo "I: "
 RET=0
 if [ "x$SBUILD_COMMAND" == "x" ]; then
-    CHANGELOG="$(dpkg-parsechangelog)"
-    SOURCE="$(echo "$CHANGELOG" | grep Source | sed s/Source:\ //g)"
-    VERSION="$(echo "$CHANGELOG" | grep Version | sed s/Version:\ //g)"
-    DSC=${SOURCE}_${VERSION}.dsc
-    echo "I: Building source"
     sb-prehook $VARIANT $DIST
-    dpkg-buildpackage -us -uc -sa -S
-    cd ..
-    sbuild --source -A -d $DIST -j $CPUCOUNT $DSC $SB_SBUILD_OPTS
+    if [ "x$SBUILD_DSC" == "x" ]; then
+        CHANGELOG="$(dpkg-parsechangelog)"
+        SOURCE="$(echo "$CHANGELOG" | grep Source | sed s/Source:\ //g)"
+        VERSION="$(echo "$CHANGELOG" | grep Version | sed s/Version:\ //g)"
+        DSC=${SOURCE}_${VERSION}.dsc
+        echo "I: Building source"
+        dpkg-buildpackage -us -uc -sa -S
+        cd ..
+    else
+        DSC=$SBUILD_DSC
+    fi
+    sbuild -v --source -A -d $DIST -j $CPUCOUNT $DSC $SB_SBUILD_OPTS
     RET=$?
     cd -
     sb-posthook $VARIANT $DIST
