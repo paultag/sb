@@ -1,4 +1,4 @@
-sb (1.0.7) UNRELEASED; urgency=low
+sb (1.0.7) wicked; urgency=low
 
   * Adding in some flags:
     + SB_BREAK_WAIT (if you don't want to wait on another PID)
